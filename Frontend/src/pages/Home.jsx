@@ -68,7 +68,7 @@ const Home = () => {
 
   const handlePickupChange = async (e) => {
     const inputValue = e.target.value;
-    const url = `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`;
+    // const url = `${import.meta.env.VITE_BASE_URL}/maps/get-suggestions`;
     const userToken = localStorage.getItem("userToken");
 
     // console.log("Input ->", inputValue);
@@ -255,7 +255,7 @@ const Home = () => {
       <div className='  absolute inset-0 z-0 '>
         <LiveTracking
 
-          className='pointer-events-auto'
+          // className='pointer-events-auto'
         />
       </div>
 

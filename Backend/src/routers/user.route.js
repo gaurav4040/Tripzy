@@ -6,16 +6,16 @@ import { authUser } from "../middlewares/auth.middleware.js";
 const userRouter = Router();
 
 userRouter.post('/register',
-    [
+    [ 
         body('email').isEmail().withMessage("Invalid Email"),
         body('fullName.firstName').isLength({ min: 3 }).withMessage("First Name must be 3 letters"),
-        body('password').isLength({ min: 6 }).withMessage("password must be 6 lenght")
+        body('password').isLength({ min: 6 }).withMessage("password must be 6 length")
     ], registerUser
 )
 
 userRouter.post('/login', [
     body('email').isEmail().withMessage("Invalid Email"),
-    body('password').isLength({ min: 6 }).withMessage("password must be 6 lenght")
+    body('password').isLength({ min: 6 }).withMessage("password must be 6 length")
     , loginUser])
 
 userRouter.get('/profile', authUser, getUserProfile)

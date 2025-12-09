@@ -24,7 +24,7 @@ app.get('/',(req,res)=>{
     res.send("Hello World!!")
 })
 
-app.use("/users",userRouter)
+app.use("/users",userRouter);
 app.use("/captains",captainRouter)
 app.use('/maps',mapRouter)
 app.use('/rides',rideRouter)

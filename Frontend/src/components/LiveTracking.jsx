@@ -15,7 +15,7 @@ function Recenter({ position }) {
   const map = useMap();
   useEffect(() => {
     if (position) {
-      map.setView(position, 16); // zoom level 16
+      map.flyTo(position, 16,{duration:2}); // zoom level 16
     }
   }, [position, map]);
   return null;
@@ -52,6 +52,9 @@ const LiveTracking = () => {
         center={position || { lat: 28.6139, lng: 77.209 }} // fallback Delhi
         zoom={15}
         style={{ height: "100%", width: "100%" }}
+        dragging={true}
+        
+        markerZoomAnimation={true}
       >
         {/* OpenStreetMap tiles */}
         <TileLayer
@@ -62,8 +65,25 @@ const LiveTracking = () => {
         {/* Show marker only if position available */}
         {position && (
           <>
-            <Marker position={position} icon={userIcon}>
-              <Popup>📍 You are here</Popup>
+            <Marker
+              position={position}
+              icon={userIcon}
+              draggable={true}
+              eventHandlers={{
+                dragend: (e) => {
+                  const marker = e.target;
+                  const newPos = marker.getLatLng();
+
+                  setPosition({
+                    lat: newPos.lat,
+                    lng: newPos.lng,
+                  });
+
+                  console.log("Dragged to:", newPos.lat, newPos.lng);
+                },
+              }}
+            >
+              <Popup>📍 Drag me</Popup>
             </Marker>
             <Recenter position={position} />
           </>
